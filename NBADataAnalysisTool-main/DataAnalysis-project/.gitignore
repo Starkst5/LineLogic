@@ -1,0 +1,55 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+build
+.env
+.DS_Store
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# =========================
+# NBA DATA PIPELINE ADDITIONS
+# =========================
+
+# Kaggle raw data (VERY IMPORTANT – large files)
+data/kaggle_nba_sync/
+*.csv
+*.parquet
+*.zip
+
+# Refresh logs
+refresh_log.txt
+cron_output.log
+
+# Kaggle credentials / secrets
+.kaggle/
+kaggle.json
+.env
+
+# Python cache (if using scripts)
+__pycache__/
+*.pyc
+*.pyo
+
+# Local database artifacts
+*.db
+*.sqlite
