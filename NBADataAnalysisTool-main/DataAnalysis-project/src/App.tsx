@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import { ProtectedRoute } from "./components/ProtectedRoute";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import { HeroSection } from "./components/HeroSection";
-import { LoginModal } from "./components/LoginModal";
-import { RegisterModal } from "./components/RegisterModal";
+import { ProtectedRoute } from "./Components/ProtectedRoute";
+import { Header } from "./Components/Header";
+import { Footer } from "./Components/Footer";
+import { HeroSection } from "./Components/HeroSection";
+import { LoginModal } from "./Components/LoginModal";
+import { RegisterModal } from "./Components/RegisterModal";
 import GamesPage from "./Pages/GamesPage";
 import PlayersPage from "./Pages/PlayersPage";
 import PlayerPage from "./Pages/PlayerPage";
@@ -14,16 +14,12 @@ import AboutPage from "./Pages/AboutPage";
 import logicLogo from "./assets/LineLogicLogo.png";
 import { ThemeProvider } from "./context/ThemeContext";
 import logicLogoLight from "./assets/LineLogicLogoLight.png";
-
-
 import { auth } from "./firebase";
-
 
 export default function App() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
 
-  // ✅ listens for login modal "Sign Up" click
   useEffect(() => {
     const handler = () => {
       setLoginOpen(false);
