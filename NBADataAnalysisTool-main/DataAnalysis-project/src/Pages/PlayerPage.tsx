@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { API_BASE } from '../lib/api';
 import { useParams } from "react-router-dom";
 import { Header } from "../Components/Header";
 import { Footer } from "../Components/Footer";
@@ -160,7 +161,7 @@ export default function PlayerPage({
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch(`/api/players/${id}`);
+        const res = await fetch(`${API_BASE}/api/players/${id}`);
         if (!res.ok) {
           const msg = await res.text();
           throw new Error(`Failed to load games: ${res.status} ${msg}`);
@@ -182,7 +183,7 @@ export default function PlayerPage({
     if (!id) return;
     const fetchContext = async () => {
       try {
-        const res = await fetch(`/api/players/${id}/context`);
+        const res = await fetch(`${API_BASE}/api/players/${id}/context`);
         if (!res.ok) throw new Error("Failed to load game context");
         const data = await res.json();
         setGameContext(data);
@@ -198,7 +199,7 @@ export default function PlayerPage({
     if (!id) return;
     const fetchTeammates = async () => {
       try {
-        const res = await fetch(`/api/players/${id}/teammates`);
+        const res = await fetch(`${API_BASE}/api/players/${id}/teammates`);
         if (!res.ok) return;
         const data: Teammate[] = await res.json();
         setTeammates(data);
@@ -219,7 +220,7 @@ export default function PlayerPage({
       try {
         const results = await Promise.all(
           selectedTeammates.map((t) =>
-            fetch(`/api/players/${id}/teammate-games/${t.person_id}`)
+            fetch(`${API_BASE}/api/players/${id}/teammate-games/${t.person_id}`)
               .then((r) => r.json()) as Promise<TeammatePresence[]>
           )
         );

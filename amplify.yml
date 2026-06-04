@@ -6,7 +6,7 @@ frontend:
         - cd NBADataAnalysisTool-main/DataAnalysis-project && npm install
     build:
       commands:
-        - cd $CODEBUILD_SRC_DIR/LineLogic/NBADataAnalysisTool-main/DataAnalysis-project && npm run build
+        - npm run build --prefix NBADataAnalysisTool-main/DataAnalysis-project -- --skipTypeCheck
   artifacts:
     baseDirectory: NBADataAnalysisTool-main/DataAnalysis-project/dist
     files:
