@@ -3,12 +3,10 @@ frontend:
   phases:
     preBuild:
       commands:
-        - cd NBADataAnalysisTool-main/DataAnalysis-project
-        - npm install
+        - cd NBADataAnalysisTool-main/DataAnalysis-project && npm install
     build:
       commands:
-        - cd NBADataAnalysisTool-main/DataAnalysis-project
-        - npm run build
+        - cd NBADataAnalysisTool-main/DataAnalysis-project && npm run build
   artifacts:
     baseDirectory: NBADataAnalysisTool-main/DataAnalysis-project/dist
     files:
