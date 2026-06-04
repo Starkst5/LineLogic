@@ -1,2 +1,1 @@
-export const API_BASE = import.meta.env.VITE_API_URL || "https://linelogic.onrender.com";
- 
+export const API_BASE = "https://linelogic.onrender.com";
