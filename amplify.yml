@@ -6,7 +6,7 @@ frontend:
         - cd NBADataAnalysisTool-main/DataAnalysis-project && npm install
     build:
       commands:
-        - cd NBADataAnalysisTool-main/DataAnalysis-project && npm run build
+        - cd $CODEBUILD_SRC_DIR/NBADataAnalysisTool-main/DataAnalysis-project && npm run build
   artifacts:
     baseDirectory: NBADataAnalysisTool-main/DataAnalysis-project/dist
     files:
