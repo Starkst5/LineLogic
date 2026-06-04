@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { API_BASE } from '../lib/api';
 import { useNavigate } from "react-router-dom";
-import { Header } from "../components/Header";
-import { Footer } from "../components/Footer";
+import { Header } from "../Components/Header";
+import { Footer } from "../Components/Footer";
 
 interface GamesPageProps {
   logicLogo: string;
@@ -71,7 +72,7 @@ export default function GamesPage({
       setExpandedGameId(null);
       setTeamPlayers({});
       try {
-        const res = await fetch(`/api/players/games/schedule?date=${selectedDate}`);
+        const res = await fetch(`${API_BASE}/api/players/games/schedule?date=${selectedDate}`);
         if (!res.ok) throw new Error("Failed to load games");
         const data: Game[] = await res.json();
         setGames(data);
@@ -89,7 +90,7 @@ export default function GamesPage({
     if (teamPlayers[teamId]) return;
     setLoadingPlayers((prev) => ({ ...prev, [teamId]: true }));
     try {
-      const res = await fetch(`/api/players/games/team/${teamId}/players`);
+      const res = await fetch(`${API_BASE}/api/players/games/team/${teamId}/players`);
       if (!res.ok) throw new Error("Failed to load players");
       const data: TeamPlayer[] = await res.json();
       setTeamPlayers((prev) => ({ ...prev, [teamId]: data }));
