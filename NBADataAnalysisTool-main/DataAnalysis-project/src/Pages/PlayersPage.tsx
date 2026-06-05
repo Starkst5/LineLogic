@@ -67,7 +67,7 @@ export default function PlayersPage({
     setHasSearched(true);
 
     try {
-      const url = `/api/players/search?search=${encodeURIComponent(searchInput)}`;
+      const url = `${API_BASE}/api/players/search?search=${encodeURIComponent(searchInput)}`;
       const response = await fetch(url);
 
       const data: PlayerSearchResult[] = await response.json();
