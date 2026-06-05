@@ -26,7 +26,7 @@ jobs:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
         run: |
-          kaggle datasets download -d eoinamoore/historical-nba-data-and-player-box-scores --unzip -p ./data
+          kaggle datasets download -d eoinamoore/historical-nba-data-and-player-box-scores --unzip -p ./NBADataAnalysisTool-main/DataAnalysis-project/data/kaggle_nba_sync
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
