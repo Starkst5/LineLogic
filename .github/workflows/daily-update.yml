@@ -26,7 +26,7 @@ jobs:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
         run: |
-          kaggle datasets download -d thomasbrescou/dataset-nba-stats --unzip -p ./data
+          kaggle datasets download -d eoinamoore/historical-nba-data-and-player-box-scores --unzip -p ./data
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
