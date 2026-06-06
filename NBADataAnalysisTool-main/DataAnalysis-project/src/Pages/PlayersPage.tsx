@@ -65,13 +65,12 @@ export default function PlayersPage({
     setLoading(true);
     setError(null);
     setHasSearched(true);
+    setPlayers([]);
 
     try {
       const url = `${API_BASE}/api/players/search?search=${encodeURIComponent(searchInput)}`;
       const response = await fetch(url);
-
       const data: PlayerSearchResult[] = await response.json();
-      console.log("SEARCH RESULTS:", data); // 🔥 debug if needed
       setPlayers(data);
     } catch (err) {
       setError("Failed to fetch matching players.");
@@ -127,17 +126,21 @@ export default function PlayersPage({
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleSearch();
                 }}
-                placeholder="Search players..."
+                placeholder={loading ? "Loading player data..." : "Search players..."}
                 className="flex-1 bg-transparent text-white placeholder:text-gray-500 outline-none text-center"
               />
-
-        
-
               <button
                 onClick={handleSearch}
                 className="text-[#f5c542] px-2 flex items-center justify-center"
               >
-                <Search size={20} />
+                {loading ? (
+                  <svg className="animate-spin h-5 w-5 text-[#f5c542]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                  </svg>
+                ) : (
+                  <Search size={20} />
+                )}
               </button>
             </div>
           </div>
@@ -146,12 +149,10 @@ export default function PlayersPage({
         {error && <p className="text-red-500 mb-4">{error}</p>}
 
         {/* RESULTS */}
-        {players.length > 0 ? (
+        {loading ? null : players.length > 0 ? (
           <div className="flex flex-col items-center space-y-4">
             {players.map((player) => {
-              // ✅ SAFE IMAGE LOGIC (FIX)
               const fallbackImg = `https://cdn.nba.com/headshots/nba/latest/260x190/${player.person_id}.png`;
-
               const imgSrc = player.photo_url || fallbackImg;
 
               return (
@@ -182,11 +183,9 @@ export default function PlayersPage({
                         <StatBadge label="BLK" value={player.h2h_blk} />
                       </div>
 
-                      {/* Update label */}
                       <p className="text-gray-500 text-xs mt-1">
                         2025-26 Season Avg
                       </p>
-
                     </div>
 
                     {/* RIGHT IMAGE */}
@@ -196,7 +195,6 @@ export default function PlayersPage({
                         alt={player.player_name}
                         className="w-14 h-14 rounded-full object-cover border-2 border-[#f5c542]/30"
                         onError={(e) => {
-                          // final fallback if NBA image fails
                           (e.target as HTMLImageElement).src =
                             "https://via.placeholder.com/56x56?text=N/A";
                         }}
