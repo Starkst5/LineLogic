@@ -121,16 +121,18 @@ export default function PlayersPage({
             <div className="flex items-center gap-2">
               <input
                 type="text"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                value={loading ? "" : searchInput}
+                onChange={(e) => !loading && setSearchInput(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleSearch();
                 }}
                 placeholder={loading ? "Loading player data..." : "Search players..."}
+                disabled={loading}
                 className="flex-1 bg-transparent text-white placeholder:text-gray-500 outline-none text-center"
               />
               <button
                 onClick={handleSearch}
+                disabled={loading}
                 className="text-[#f5c542] px-2 flex items-center justify-center"
               >
                 {loading ? (
